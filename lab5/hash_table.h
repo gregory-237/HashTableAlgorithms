@@ -1,8 +1,11 @@
 ﻿#pragma once
 
+#include <algorithm>
+#include <iterator>
 #include <iostream>
 #include <exception>
 #include <cmath>
+#include <vector>
 
 template<typename K, typename T>
 struct Pair {
@@ -248,3 +251,21 @@ public:
 };
 
 
+HashTable<int, int> count_numbers(const std::vector<int>& vec)
+{
+	HashTable<int, int> table(vec.size());
+
+	for (int i = 0; i < vec.size(); ++i) {
+		table.insert_or_assign(vec[i], std::count(std::cbegin(vec), std::cend(vec), vec[i]));
+	}
+	return table;
+}
+
+void print_numbers_count(HashTable<int, int>&table, int size){
+	for (int i = 0; i < size; ++i) {
+		int* count_ptr = table.search(i);
+		if (count_ptr != nullptr) {
+			std::cout << "Number " << i << " counts " << *count_ptr << " times" << std::endl;
+		}
+	}
+}
