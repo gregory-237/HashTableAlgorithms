@@ -23,12 +23,6 @@ struct HashFunction {
 	}
 };
 
-struct PearsonHash {
-	size_t operator()(const char& key) const {
-		return (unsigned int)key;
-	}
-};
-
 template<typename K, typename T, typename Hash = HashFunction<K>>
 class HashTable {
 private:
