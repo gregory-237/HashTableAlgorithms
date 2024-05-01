@@ -2,8 +2,6 @@
 
 using namespace std;
 
-int main()
-{
-	cout << "Hello CMake." << endl;
-	return 0;
+int main() {
+    auto table_one = HashTable<int, int>(10, 10);
 }
