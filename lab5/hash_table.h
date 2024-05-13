@@ -133,9 +133,6 @@ public:
 			return;
 		}
 		while (tmp) {
-			if (tmp->key == key) {
-				throw std::invalid_argument("This key already in map");
-			}
 			if (tmp->next) {
 				tmp = tmp->next;
 			}
@@ -153,20 +150,17 @@ public:
 			_buskets[index] = new Pair<K, T>(key, value);
 			return;
 		}
+
 		while (tmp) {
-			if (tmp->key == key) {
-				tmp->value = value;
-				return;
-			}
-			if (tmp->next) {
-				tmp = tmp->next;
-			}
-			else {
-				tmp->next = new Pair<K, T>(key, value);
-				return;
-			}
+			auto tmp_del = tmp;
+			tmp = tmp->next;
+			delete tmp_del;
 		}
+
+		_buskets[index] = new Pair<K, T>(key, value);
+		return;
 	}
+
 
 	bool contains(const T& value) const {
 		for (size_t index(0); index < _size; ++index) {
