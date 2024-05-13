@@ -151,11 +151,7 @@ public:
 			return;
 		}
 
-		while (tmp) {
-			auto tmp_del = tmp;
-			tmp = tmp->next;
-			delete tmp_del;
-		}
+		erase(key);
 
 		_buskets[index] = new Pair<K, T>(key, value);
 		return;
